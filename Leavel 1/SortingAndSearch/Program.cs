@@ -18,9 +18,9 @@ namespace SortingAndSearch
         {
             Sorting sotring = new Sorting();
 
-            int[] array = GenerateArray(10);
-            sotring.BubleSort(array);
-            foreach (int e in array)
+            var array = GenerateArray(10);
+            Sorting.HoareSort(array);
+            foreach (var e in array)
                 Console.WriteLine(e);
         }
     }
