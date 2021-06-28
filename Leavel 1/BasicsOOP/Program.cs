@@ -4,6 +4,19 @@ using System.Globalization;
 
 namespace BasicsOOP
 {
+	public  class SuperBeautyImageFilter
+	{
+		public string ImageName;
+		public double GaussianParameter;
+		public void Run()
+		{
+			Console.WriteLine("Processing {0} with parameter {1}",
+				ImageName,
+				GaussianParameter.ToString(CultureInfo.InvariantCulture));
+			//do something useful
+		}
+	}
+
 	public static class ConvertStringToInt
 	{
 		public static int ToInt(this string arg)
@@ -39,8 +52,10 @@ namespace BasicsOOP
 				//	city.Location.Longitude.ToString(CultureInfo.InvariantCulture),
 				//	city.Location.Latitude.ToString(CultureInfo.InvariantCulture));
 
-				var arg1 = "100500";
-				Console.Write(arg1.ToInt() + "42".ToInt()); // 100542
+				var filter = new SuperBeautyImageFilter();
+				filter.ImageName = "Paris.jpg";
+				filter.GaussianParameter = 0.4;
+				filter.Run();
 			}
 		}
 	}
