@@ -5,12 +5,12 @@ using System.Text;
 
 namespace BasicsOOP.questions
 {
-    public class Point
+     class Point
     {
         public double X;
         public double Y;
     }
-    public class ClockwiseComparer : IComparer
+     class ClockwiseComparer : IComparer
     {
         public int Compare(object x, object y)
         {
