@@ -10,14 +10,11 @@ namespace DataIntegrity.Data
         public double Y;
         public double Length { get { return Math.Sqrt(X * X + Y * Y); }  }
 
-
         public Vector(double x, double y)
         {
             X = x;
             Y = y;
         }
-
-        // добавьте конструктор!
 
         public override string ToString()
         {
