@@ -11,7 +11,7 @@ namespace PocketGoogle
         private char[] separation = new[] {' ', '.', ',', '!', '?', ':', '-', '\r', '\n'};
         private Dictionary<string, Dictionary<int, HashSet<int>>> words;
 
-        #region FunctionAdd
+        #region Function Add
         public void Add(int id, string documentText)
         {
             var document = documentText.Split(separation);
