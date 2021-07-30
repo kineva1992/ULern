@@ -15,18 +15,18 @@ namespace TodoApplication
             Index = index;
         }
     }
-    internal enum ActionType
-    { 
-    AddItem,
-    RemoveItem
-    }
 
+    internal enum ActionType
+    {
+        AddItem,
+        RemoveItem
+    }
 
     public class ListModel<TItem>
     {
         public List<TItem> Items { get; }
         public int Limit;
-        private LimitedSizeStack<Action<TItem>> actionStack; 
+        private LimitedSizeStack<Action<TItem>> actionStack;
 
         public ListModel(int limit)
         {
@@ -38,10 +38,12 @@ namespace TodoApplication
         public void AddItem(TItem item)
         {
             Items.Add(item);
+            actionStack.Push(item: new Action<TItem>(ActionType.AddItem, item, index: Items.Count - 1));
         }
 
         public void RemoveItem(int index)
         {
+            actionStack.Push(item: new Action<TItem>(ActionType.RemoveItem, Items[index], index));
             Items.RemoveAt(index);
         }
 
@@ -53,7 +55,7 @@ namespace TodoApplication
         public void Undo()
         {
             var action = actionStack.Pop();
-            if(action.ActionType == ActionType.AddItem)
+            if (action.ActionType == ActionType.AddItem)
             {
                 Items.RemoveAt(action.Index);
                 return;
