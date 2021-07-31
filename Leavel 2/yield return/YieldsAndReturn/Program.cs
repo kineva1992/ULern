@@ -1,4 +1,5 @@
 ﻿using System;
+using YieldsAndReturn.Classes;
 
 namespace YieldsAndReturn
 {
@@ -6,7 +7,11 @@ namespace YieldsAndReturn
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+           
+            foreach (var number in GeneratingSequence.GenerateCycle(4))
+            {
+                Console.WriteLine(number);
+            }
         }
     }
 }
