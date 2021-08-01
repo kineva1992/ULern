@@ -4,36 +4,26 @@ namespace yield
 {
     public static class MovingAverageTask
     {
-        public static IEnumerable<DataPoint> MovingAverage(this IEnumerable<DataPoint> data, int windowWidth)
-        {
-            if (data == null) yield break;
-            var queue = new Queue<double>();
-            var sum = 0.0;
-            var beginningWindowWidth = windowWidth;
-            foreach (var e in data)
-            {
-                if (beginningWindowWidth != 0) beginningWindowWidth--;
-                var newDataPoint = GetCopyDataPoint(e);
-                queue.Enqueue(e.OriginalY);
-                sum += e.OriginalY;
-                if (queue.Count > windowWidth)
-                    sum -= queue.Dequeue();
-
-                newDataPoint.AvgSmoothedY = sum / (windowWidth - beginningWindowWidth);
-                yield return newDataPoint;
-            }
-        }
-
-        public static DataPoint GetCopyDataPoint(DataPoint dataPoint)
-        {
-            return new DataPoint
-            {
-                X = dataPoint.X,
-                OriginalY = dataPoint.OriginalY,
-                ExpSmoothedY = dataPoint.ExpSmoothedY,
-                AvgSmoothedY = dataPoint.AvgSmoothedY,
-                MaxY = dataPoint.MaxY
-            };
-        }
-    }
+		public static IEnumerable<DataPoint> MovingAverage(this IEnumerable<DataPoint> data, int windowWidth)
+		{
+			if (windowWidth <= 0)
+				throw new System.ArgumentOutOfRangeException();
+			Queue<double> lastYs = new Queue<double>();
+			double sum = 0;
+			double result = 0;
+			foreach (var dataPoint in data)
+			{
+				if (lastYs.Count < windowWidth)
+				{
+					sum += dataPoint.OriginalY;
+					result = sum / (lastYs.Count + 1);
+				}
+				else
+					result += (dataPoint.OriginalY - lastYs.Dequeue()) / windowWidth;
+				var newDataPoint = dataPoint.WithAvgSmoothedY(result);
+				yield return newDataPoint;
+				lastYs.Enqueue(dataPoint.OriginalY);
+			}
+		}
+	}
 }
