@@ -50,4 +50,21 @@ namespace SheetsAndDictionaries
 
         }
     }
+
+    class Point
+    { 
+    public int X { get; set; }
+    public int Y { get; set; }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return X * 1023 * Y;
+            }
+        }
+
+    }
+
+    
 }
