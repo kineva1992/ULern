@@ -7,7 +7,8 @@ namespace Delegates
 {
     class Sorting
     {
-        public static void Sort(string[] array, IComparer<string> copmare)
+        public delegate int StringComparer(string x, string y);
+        public static void Sort(string[] array, StringComparer copmare)
         {
 
             for (int i = array.Length - 1; i > 0; i--)
@@ -16,7 +17,7 @@ namespace Delegates
                 {
                     var element1 = array[j - 1];
                     var element2 = array[j];
-                    if (copmare.Compare(element1, element2) > 0)
+                    if (copmare(element1, element2) > 0)
                     {
                         var tempory = array[j];
                         array[j] = array[j - 1];
@@ -37,11 +38,11 @@ namespace Delegates
         }
     }
 
-    class StringCompare : IComparer<string>
-    {
-        public int Compare(string x, string y)
-        {
-            return x.CompareTo(y);
-        }
-    }
+    //class StringCompare : IComparer<string>
+    //{
+    //    public int Compare(string x, string y)
+    //    {
+    //        return x.CompareTo(y);
+    //    }
+    //}
 }
