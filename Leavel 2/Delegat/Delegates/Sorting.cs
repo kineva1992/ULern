@@ -7,6 +7,7 @@ namespace Delegates
 {
     class Sorting
     {
+
         public delegate int StringComparer(string x, string y);
         public static void Sort(string[] array, StringComparer copmare)
         {
