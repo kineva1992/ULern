@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Delegates
 {
-    class DelegateTask
+//	Можно было не создавать свой делегат TellUser в прошлой задаче, а использовать Action.Но в некоторых ситуациях Action и Func недостаточно.
+
+//Задача все та же — напишите определение делегата TryGet так, чтобы код скомпилировался!
+
+	class DelegateTask
     {
 		delegate bool TryGet<T1, T2>(string questionText, Action<string> tellUser, out int age);
 		static void Main()
