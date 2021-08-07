@@ -5,6 +5,16 @@ using System.Text;
 
 namespace Delegates
 {
+    public class Comparer
+    {
+        public bool Descending { get; set; }
+        public int ComparerString(string x, string y)
+        {
+            return x.CompareTo(y) * (Descending ? -1 : 1);
+        }
+
+    }
+
     class Sorting
     {
 
