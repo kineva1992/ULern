@@ -8,18 +8,18 @@ namespace Delegates
     public class Comparer
     {
         public bool Descending { get; set; }
-        public int ComparerString(string x, string y)
+        public int CompareStrings(string x, string y)
         {
             return x.CompareTo(y) * (Descending ? -1 : 1);
         }
 
     }
 
-    class Sorting
+    public class Sorting
     {
 
         public delegate int StringComparer(string x, string y);
-        public static void Sort(string[] array, StringComparer copmare)
+        public void Sort(string[] array, StringComparer copmare)
         {
 
             for (int i = array.Length - 1; i > 0; i--)
@@ -41,7 +41,7 @@ namespace Delegates
         }
     }
 
-    class StringLengthComparer : IComparer<string>
+    public class CompareStringLength : IComparer<string>
     {
         public int Compare( string x, string y)
         {
