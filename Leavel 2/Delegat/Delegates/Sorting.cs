@@ -15,11 +15,13 @@ namespace Delegates
 
     }
 
+    
     public class Sorting
     {
 
-        public delegate int StringComparer(string x, string y);
-        public void Sort(string[] array, StringComparer copmare)
+        //public delegate int StringComparer(string x, string y);
+        public delegate int ObjectComperer<T>(T x, T Y);
+        public void Sort<T>(T[] array, ObjectComperer<T> copmare)
         {
 
             for (int i = array.Length - 1; i > 0; i--)
