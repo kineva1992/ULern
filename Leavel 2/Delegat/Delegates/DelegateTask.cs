@@ -14,6 +14,11 @@ namespace Delegates
 		private static readonly Func<int,string> toString = (x) =>  Convert.ToString(x); 
 		private static readonly Func<double,double,double> add = (x,y) => x+y;
 		private static readonly Action<string> print = (str) => Console.WriteLine(str);
+
+		static Func<T1, T3> Combine<T1, T2, T3>(Func<T1, T2> f, Func<T2, T3> g)
+		{
+			return x => g(f(x));
+}
 	}
 	class DelegateTask
     {
