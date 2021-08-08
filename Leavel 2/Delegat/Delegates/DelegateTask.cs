@@ -4,10 +4,17 @@ using System.Text;
 
 namespace Delegates
 {
-//	Можно было не создавать свой делегат TellUser в прошлой задаче, а использовать Action.Но в некоторых ситуациях Action и Func недостаточно.
+	//	Можно было не создавать свой делегат TellUser в прошлой задаче, а использовать Action.Но в некоторых ситуациях Action и Func недостаточно.
 
-//Задача все та же — напишите определение делегата TryGet так, чтобы код скомпилировался!
+	//Задача все та же — напишите определение делегата TryGet так, чтобы код скомпилировался!
 
+	class LambdaTask
+	{
+		private static readonly Func<int> zero = () => 0;
+		private static readonly Func<int,string> toString = (x) =>  Convert.ToString(x); 
+		private static readonly Func<double,double,double> add = (x,y) => x+y;
+		private static readonly Action<string> print = (str) => Console.WriteLine(str);
+	}
 	class DelegateTask
     {
 		delegate bool TryGet<T1, T2>(string questionText, Action<string> tellUser, out int age);
