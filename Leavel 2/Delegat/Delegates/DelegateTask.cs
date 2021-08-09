@@ -20,6 +20,7 @@ namespace Delegates
 			return x => g(f(x));
 }
 	}
+
 	class DelegateTask
     {
 		delegate bool TryGet<T1, T2>(string questionText, Action<string> tellUser, out int age);
@@ -41,5 +42,7 @@ namespace Delegates
 			var answer = Console.ReadLine();
 			return int.TryParse(answer, out age);
 		}
+
+
 	}
 }
