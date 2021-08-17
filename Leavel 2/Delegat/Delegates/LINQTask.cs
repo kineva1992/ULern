@@ -50,6 +50,20 @@ namespace Delegates
                 yield return e.Current;            
             }
         }
+
+        // Не надо создавать счетчик, отнимай от полученного 
+
+        private static IEnumerable<T> Take2<T>(IEnumerable<T> source, int count)
+        {
+            if (count == 0)
+                yield break;
+            foreach (var e in source)
+            {
+                yield return e;
+                if (--count == 0)
+                    yield break;
+            }
+        }
     }
 
 }
