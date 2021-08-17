@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Linq;
 
 namespace func_rocket
@@ -11,11 +12,7 @@ namespace func_rocket
 		/// </summary>
 		public static RocketForce GetThrustForce(double forceValue)
 		{
-			return r =>
-			{
-				var rocket = new Vector(r.Location.X, r.Location.Y);
-				return rocket.Rotate(r.Direction) * forceValue;
-			};
+			return r => new Vector(forceValue * Math.Cos(r.Direction), forceValue * Math.Sin(r.Direction));
 		}
 
 		/// <summary>
@@ -23,7 +20,7 @@ namespace func_rocket
 		/// </summary>
 		public static RocketForce ConvertGravityToForce(Gravity gravity, Size spaceSize)
 		{
-			return r => Vector.Zero;
+			return r => gravity(spaceSize, r.Location);
 		}
 
 		/// <summary>
@@ -31,7 +28,13 @@ namespace func_rocket
 		/// </summary>
 		public static RocketForce Sum(params RocketForce[] forces)
 		{
-			return forces[0];
+			return r =>
+			{
+				var sum = new Vector(0, 0);
+				foreach (var force in forces)
+					sum += force(r);
+				return sum;
+			};
 		}
 	}
 }
