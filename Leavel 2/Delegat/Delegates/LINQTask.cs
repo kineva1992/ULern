@@ -24,7 +24,32 @@ namespace Delegates
         {
             return soccer.FirstOrDefault(e => filter(e));
         }
+
+        // TakeTask 
+
+        private static IEnumerable<T> Take<T>(IEnumerable<T> source, int count)
+        {
+            var counter = 0;
+            if (count == 0) yield break;
+            foreach (var item in source)
+            {
+                yield return item;
+                counter++;
+                if (counter == count)
+                    yield break;
+            }
+        }
+
+        //решение через интерфейс IEnumerable
+
+        private static IEnumerable<T> TakeVe2<T>(IEnumerable<T> soccer, int count)
+        {
+            var e = soccer.GetEnumerator();
+            while (count-- > 0 && e.MoveNext())
+            {
+                yield return e.Current;            
+            }
+        }
     }
 
-    // TakeTask 
 }
