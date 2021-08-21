@@ -23,9 +23,17 @@ namespace FirstSteps
             return text.Substring(text.Length / 2).Replace(" ", null);
         }
 
+        static int Reverce(int myInt)
+        {
+            char[] myChar = myInt.ToString().ToCharArray();
+            Array.Reverse(myChar);
+            return int.Parse(new string(myChar));
+        }
 
         static void Main(string[] args)
         {
+            int myInt = 123456789;
+            Console.WriteLine(Reverce(myInt));
             Console.WriteLine(GetGreetingMessage("Student", 10.01));
             Console.WriteLine(GetGreetingMessage("Bill Gates", 10000000.5));
             Console.WriteLine(GetGreetingMessage("Steve Jobs", 1));
