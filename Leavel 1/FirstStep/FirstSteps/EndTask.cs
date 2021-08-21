@@ -44,7 +44,25 @@ namespace FirstSteps
             if (hours > 6 && hours < 12)
                 hours = 6 - (hours - 6);
             return hours * stepHourAngle;
+        }
 
+        //Task 4
+        static int GetCountParts(int n, int x, int y)
+        {
+            int count = 0;
+            for (int i = 1; i < n; i++)
+                if (i % x == 0 || i % y == 0)
+                    count++;
+            return count;
+        }
+
+        static int[] GetArrParts(int n, int x, int y)
+        {
+            int[] arrParts = new int[GetCountParts(n, x, y)];
+            for (int i = 1, j = 0; i < n; i++)
+                if (i % x == 0 || i % y == 0)
+                    arrParts[j++] = i;
+            return arrParts;
         }
     }
 }
