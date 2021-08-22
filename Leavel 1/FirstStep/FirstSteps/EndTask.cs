@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 
 namespace FirstSteps
 {
@@ -80,7 +81,7 @@ namespace FirstSteps
 
     }
     //Task 6
-    class Point
+    class Points
     { 
     public double PointX { get; set; }
     public double PointY { get; set; }
@@ -88,12 +89,12 @@ namespace FirstSteps
 
     static class Length
     {
-        private static double GetLength(Point p1, Point p2)
+        private static double GetLength(Points p1, Points p2)
         {
             return Math.Sqrt(Math.Pow((p1.PointX - p2.PointX), 2) + Math.Pow((p1.PointY - p2.PointY), 2));
         }
 
-        public static double GetPointLength(Point p1, Point p2, Point point)
+        public static double GetPointLength(Points p1, Points p2, Points point)
         {
             return Math.Abs((p2.PointY - p1.PointY) * point.PointX - (p2.PointX - p1.PointX) * p2.PointY + p1.PointY - p2.PointY * p1.PointX)
                 / GetLength(p1, p2);
@@ -104,8 +105,8 @@ namespace FirstSteps
 
         public class Vector
         {
-        public double A { get; set; }
-        public double B { get; set; }
+            public double A { get; set; }
+            public double B { get; set; }
 
             public Vector(double a, double b)
             {
@@ -138,6 +139,20 @@ namespace FirstSteps
             }
         }
 
+        //Task 8
 
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                Point p1 = new Point(100, 100);
+                Point p2 = new Point(200, 200);
+                Point p0 = new Point(100, 200);
+                double x = (p1.X * p1.X * p0.X - 2 * p1.X * p2.X * p0.X + p2.X * p2.X * p0.X + p2.X * (p1.Y - p2.Y) * (p1.Y - p0.Y) - p1.X * (p1.Y - p2.Y) * (p2.Y - p0.Y)) / ((p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y));
+                double y = (p2.X * p2.X * p1.Y + p1.X * p1.X * p2.Y + p2.X * p0.X * (p2.Y - p1.Y) - p1.X * (p0.X * (p2.Y - p1.Y) + p2.X * (p1.Y + p2.Y)) + (p1.Y - p2.Y) * (p1.Y - p2.Y) * p0.Y) / ((p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y));
+                Point p3 = new Point((int)Math.Round(x), (int)Math.Round(y));
+                Console.WriteLine(p3);
+            }
+        }
     }
 }
