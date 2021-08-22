@@ -154,5 +154,27 @@ namespace FirstSteps
                 Console.WriteLine(p3);
             }
         }
+
+        //Сделай то, не знаю что
+
+        /*
+         Задача-загадка. Задания нет — так и задумано. 
+         Не бойтесь экспериментировать. Запустите код на выполнение и внимательно изучите ошибки. Ориентируясь на текст ошибок попробуйте сами понять, что нужно сделать.
+         Эта задача требует смекалки и упорства!
+         */
+
+        static object Decode(object obj)
+        {
+            string cleaned = obj.ToString();
+
+            foreach (var ch in new char[] {'.', ','})
+            {
+                cleaned = cleaned.Replace(ch.ToString(), "");
+            }
+
+            var number = Int32.Parse(cleaned);
+            var decode = number % 1024;
+            return decode;
+        }
     }
 }
