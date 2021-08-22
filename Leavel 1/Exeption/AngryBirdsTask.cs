@@ -9,14 +9,12 @@ namespace AngryBirds
 		// Но писать её естественно не обязательно.
 		/// <param name="v">Начальная скорость</param>
 		/// <param name="distance">Расстояние до цели</param>
+		/// <param name="gravitation">Сила притяжения</param>>
 		/// <returns>Угол прицеливания в радианах от 0 до Pi/2</returns>
 		public static double FindSightAngle(double v, double distance)
 		{
 			//Сила гравитации
 			const double gravitation = 9.8;
-
-
-
 			return 0.5 * Math.Asin(distance * gravitation / (v*v));
 		}
 	}
