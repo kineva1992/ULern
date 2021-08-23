@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-
+using System.Linq;
 
 namespace PracticeInterest
 {
@@ -54,12 +54,24 @@ namespace PracticeInterest
                 else return amount;
 
             }
+            // Версия с циклом
+            public static double Calculators(string inputUserText)
+            {
+                double[] splitTextUserInput = inputUserText.Split(' ').Select(double.Parse).ToArray();
+                double sum = splitTextUserInput[0] ,
+                       amount = splitTextUserInput[0],
+                       parcent = splitTextUserInput[1],
+                       mounts = splitTextUserInput[2];
+                for (int i = 0; i < mounts; i++)
+                {
+                    sum += sum * ((parcent / 12) / 100);
+                }
+
+                return sum;
+            }
         }
         static void Main(string[] args)
         {
-
-            
-
             Console.WriteLine(Calculator.Calculate("100.00 12 1"));  
         }
     }
