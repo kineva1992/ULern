@@ -19,7 +19,7 @@ namespace PracticeInterest
 
         Козла пустили в квадратный огород и привязали к колышку. Колышек воткнули точно в центре огорода. Козёл ест всё, до чего дотянется, не перелезая через забор огорода и не разрывая веревку. Какая площадь огорода будет объедена? Даны длина веревки и размеры огорода.
      */
-    class TasksForTheWorkshop
+   public class TasksForTheWorkshop
     {
 
         //Task 10
@@ -42,7 +42,25 @@ namespace PracticeInterest
 
         //Task 11
 
-        public static 
+        public static double CalculateAlnge(int hours, int minuts)
+        {
+            int hAngle = (hours * 60 + minuts) / 2;
+            if (hAngle > 360)
+                hAngle -= 360;
+            int mAngle = minuts * 6;
+
+            return Math.Abs(hAngle - mAngle);
+        
+        }
+
+        public static double timeAngle(int h, int m)
+        {
+            double hAngle = 0.5D * (h * 60 + m);
+            double mAngle = 6 * m;
+            double angle = Math.Abs(hAngle - mAngle);
+            angle = Math.Min(angle, 360 - angle);
+            return angle;
+        }
 
     }
 }
