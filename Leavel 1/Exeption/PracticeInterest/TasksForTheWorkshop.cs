@@ -22,7 +22,7 @@ namespace PracticeInterest
    public class TasksForTheWorkshop
     {
 
-        //Task 10
+        //Expr10
 
         public static void CalculateSum()
         {
@@ -40,7 +40,7 @@ namespace PracticeInterest
         }
 
 
-        //Task 11
+        //Expr11
 
         public static double CalculateAlnge(int hours, int minuts)
         {
@@ -61,6 +61,38 @@ namespace PracticeInterest
             angle = Math.Min(angle, 360 - angle);
             return angle;
         }
+       
+       //Expr12
+       
+       /*
+        Исходные даныне:
+        целые числа h, t, v, x (5000 ≤ h ≤ 12000; 50 ≤ t ≤ 1200; 1 ≤ x < v ≤ 100; h ≤ t · v), где
+        h - высота полёта,
+        t - время подъема до h,
+        x - минимальная скорость подъема, начиная от которой закладывает уши
+        v - максимальная скорость подъема самолета
+        Пример: Ввод (10000, 500, 50, 10) -> Вывод (125 500)
+       */
+       
+       public static void PassengersComfort(double h, double t, double x, double v)
+       {
+       if(h < 5000 ||
+          h > 12000 ||
+          t < 50 ||
+          t > 1200 ||
+          x < 1 ||
+          x > v ||
+          v > 100 ||
+          t * v < h) throw new ArgumentExeption();
+           
+           double tMin;
+           double tMax;
+           
+           tMax = t;
+           TMin = (h - x * t) / (v - x);
+           
+           Console.WriteLine(tMin + " " +TMax);
+       }
 
     }
 }
