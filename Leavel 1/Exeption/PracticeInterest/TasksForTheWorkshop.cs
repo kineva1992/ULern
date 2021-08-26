@@ -84,28 +84,30 @@ namespace PracticeInterest
           x < 1 ||
           x > v ||
           v > 100 ||
-          t * v < h) throw new ArgumentExeption();
+          t * v < h) throw new ArgumentException();
            
            double tMin;
            double tMax;
            
            tMax = t;
-           TMin = (h - x * t) / (v - x);
+           tMin = (h - x * t) / (v - x);
            
-           Console.WriteLine(tMin + " " +TMax);
+           Console.WriteLine(tMin + " " + tMax);
        }
+
+        //Expr13
+        public static double LengthToGetGoat(double l, double r)
+        {
+            const double PI = Math.PI;
+            double s = PI * (r * r);
+            if (r < 2 * r)
+            {
+                double a = Math.Acos(l / 2 / r);
+                s -= 4 * (a * r * r - l / 2 * r * Math.Sin(a));
+            }
+            return s;
+        }
     }
     
-    //Expr13
-    public static double LengthToGetGoat(double l, double r)
-    {
-    const PI = Math.PI;
-    double s = PI * (r*r);
-     if(r < 2 * r)
-     {
-     double a = Math.Acos(l / 2 / r);
-     s -= 4 * (a * r * r - l / 2 * r * Math.Sin(a));
-     }
-       return s;
-    }
+    
 }
