@@ -76,6 +76,7 @@ namespace PracticeInterest
        
        public static void PassengersComfort(double h, double t, double x, double v)
        {
+           
        if(h < 5000 ||
           h > 12000 ||
           t < 50 ||
@@ -93,6 +94,16 @@ namespace PracticeInterest
            
            Console.WriteLine(tMin + " " +TMax);
        }
-
+    }
+    public static double LengthToGetGoat(double l, double r)
+    {
+    const PI = Math.PI;
+    double s = PI * (r*r);
+     if(r < 2 * r)
+     {
+     double a = Math.Acos(l / 2 / r);
+     s -= 4 * (a * r * r - l / 2 * r * Math.Sin(a));
+     }
+       return s;
     }
 }
