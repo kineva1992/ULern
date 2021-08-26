@@ -1,8 +1,10 @@
-﻿namespace Pluralize
+﻿using System;
+
+namespace Pluralize
 {
 	public static class PluralizeTask
 	{
-		public static string PluralizeRubles(int count)
+		public static string PluralizeRublesWitchIf(int count)
 		{
             var ending = "";
             var lastNumber = count % 10;
@@ -17,5 +19,36 @@
 
             return "руб" + ending;
         }
-	}
+
+        public static string PluralizeRubles(int count)
+        {
+            var result = "";
+
+            if (count % 100 > 10 && count % 100 < 21)
+                return "рублей";
+            switch (count % 10)
+            {
+                case 1:
+                    result = "рубль";
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    result = "рубля";
+                    break;
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 0:
+                    result = "рублей";
+                    break;
+                default:
+                    throw new Exception("Нема такого слова");
+            }
+
+            return result;
+        }
+
+    }
 }
