@@ -6,9 +6,12 @@ namespace Branchings
     {
         static void Main(string[] args)
         {
-            Task.TestMove("a1", "d4");
-            Task.TestMove("f4", "e7");
-            Task.TestMove("a1", "a4");
+            Console.WriteLine(Task.MiddleOf(5, 0, 100)); // => 5
+            Console.WriteLine(Task.MiddleOf(12, 12, 11)); // => 12
+            Console.WriteLine(Task.MiddleOf(1, 1, 1)); // => 1
+            Console.WriteLine(Task.MiddleOf(2, 3, 2));
+            Console.WriteLine(Task.MiddleOf(8, 8, 8));
+            Console.WriteLine(Task.MiddleOf(5, 0, 1));
         }
     }
 }

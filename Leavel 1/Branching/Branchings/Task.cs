@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Branchings
 {
-   public static class Task
+    public static class Task
     {
         /*
         Вася решил научить своего младшего брата играть в шахматы. Но вот беда, брат еще слишком мал и никак не может запомнить как ходит ферзь. Как настоящий программист, Вася решил автоматизировать ручной труд по обучению начинающих шахматистов.
@@ -37,7 +37,7 @@ namespace Branchings
 
         public static void TestMove(string from, string to)
         {
-            Console.WriteLine("{0} - {1} {2}", from, to, IsCorrectMove(from,to));
+            Console.WriteLine("{0} - {1} {2}", from, to, IsCorrectMove(from, to));
         }
 
 
@@ -54,6 +54,43 @@ namespace Branchings
         public static int MiddleOf(int a, int b, int c)
         {
             return a + b + c - Math.Min(Math.Min(a, b), c) - Math.Max(Math.Max(a, b), c);
+        }
+
+        public static int MiddleOfVer2(int a, int b, int c)
+        {
+            if (a <= b && a >= c || a >= b && a <= c) return a;
+            if (b <= a && b >= c || b >= a && b <= c) return b;
+            else return c;
+        }
+
+        /*
+        В воскресенье Вася пошел в кружок робототехники и увидел там такой код управления боевым роботом:
+        Код показался Васе слишком длинным, а к тому же еще и неряшливым. Вася поспорил с автором, что сможет написать функцию, делающую ровно то же самое, но всего в один оператор.
+
+        Кажется, Вася погорячился... Или нет? Помогите ему не проиграть в споре!
+         */
+        static bool ShouldFireInLesson(bool enemyInFront, string enemyName, int robotHealth)
+        {
+            bool shouldFire = true;
+            if (enemyInFront == true)
+            {
+                if (enemyName == "boss")
+                {
+                    if (robotHealth < 50) shouldFire = false;
+                    if (robotHealth > 100) shouldFire = true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return shouldFire;
+        }
+
+
+        public static bool ShouldFire(bool enemyInFront, string enemyName, int robotHealth)
+        {
+            return enemyInFront && (enemyName != "boss" || robotHealth >= 50);        
         }
 
     }
