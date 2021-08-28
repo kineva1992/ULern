@@ -8,27 +8,34 @@ namespace Rectangles
 		public static bool AreIntersected(Rectangle r1, Rectangle r2)
 		{
 			// так можно обратиться к координатам левого верхнего угла первого прямоугольника: r1.Left, r1.Top
-			if (Math.Abs(r1.Width) + Math.Abs(r2.Width) >= Math.Abs(r1.Left) + Math.Abs(r2.Right) &&
-				r1.Height + r2.Height >= Math.Abs(r1.Top) + Math.Abs(r2.Bottom))
-				return true;
-			else
-				return false;
-		}
-
-		private static int GetSegmentsIntersectionLength(int r1Left, int r1Right, int r2Left, int r2Right)
-		{
-			int left = Math.Min(r1Left, r2Left);
-			int right = Math.Min(r1Right, r2Right);
-			return Math.Max(right - left, 0);
+			return !(r2.Left > r1.Right ||
+				r2.Right < r1.Left ||
+				r2.Top > r1.Bottom ||
+				r2.Bottom < r1.Top);
 		}
 
 		// Площадь пересечения прямоугольников
 		public static int IntersectionSquare(Rectangle r1, Rectangle r2)
 		{
-			int xIntersection = GetSegmentsIntersectionLength(r1.Left, r1.Right, r2.Left, r2.Right);
-			int yIntersection = GetSegmentsIntersectionLength(r1.Top, r1.Bottom, r2.Top, r2.Bottom);
+            if (!AreIntersected(r1, r2))
+                return 0;
 
-			return xIntersection * yIntersection;
+            return (Math.Max(r1.Left, r2.Left) - Math.Min(r1.Right, r2.Right)) *
+                (Math.Max(r1.Top, r2.Top) - Math.Min(r1.Bottom, r2.Bottom));
+        }
+
+		public static int ComparisonOfTriangles(Rectangle r1, Rectangle r2)
+		{
+			if (((r1.Left <= r2.Left) && (r1.Right >= r2.Right)) &&
+				 ((r1.Top <= r2.Top) && (r1.Bottom >= r2.Bottom)))
+				return 1;
+
+			else if (((r2.Left <= r1.Left) && (r2.Right >= r1.Right)) &&
+				 ((r2.Top <= r1.Top) && (r2.Bottom >= r1.Bottom)))
+				return 0;
+			else if ((r1.Left == r2.Left) && (r1.Top == r2.Top) && (r1.Right == r2.Right) && (r2.Bottom == r2.Bottom))
+				return 1;
+			return -1;
 		}
 
 		// Если один из прямоугольников целиком находится внутри другого — вернуть номер (с нуля) внутреннего.
@@ -36,7 +43,7 @@ namespace Rectangles
 		// Если прямоугольники совпадают, можно вернуть номер любого из них.
 		public static int IndexOfInnerRectangle(Rectangle r1, Rectangle r2)
 		{
-			return -1;
+			return ComparisonOfTriangles(r1, r2);
 		}
 	}
 }
