@@ -57,6 +57,36 @@ namespace PracticeInterest
                 return (side1 <= a && side2 <= b) || (side1 <= b && side2 <= a);
             }
         }
+
+        /*
+         Cond3. (1493. В одном шаге от счастья) 
+        Дан номер трамвайного билета, в котором суммы первых трёх цифр и последних трёх цифр отличаются на 1 (но не сказано, в какую сторону). 
+        Правда ли, что предыдущий или следующий билет счастливый?
+         */
+
+        public static void LuckyTicket(int number)
+        {
+            Console.WriteLine(CheckLucky(number + 1) || CheckLucky(number - 1)? "Yes" : "No");
+
+            static bool CheckLucky(int number)
+            {
+                if (number < 0 || number > 99999)
+                {
+                    throw new ArgumentException();
+                }
+                int right = number % 1000;
+                int left = number / 100;
+                return GetSum(left) == GetSum(right);
+            }
+        }
+
+        static int GetSum(int value)
+        {
+            var huderents = value / 100;
+            var decimals = (value % 100) / 10;
+            var ones = value % 10;
+            return ones + decimals + huderents;
+        }
     }
 }
 
