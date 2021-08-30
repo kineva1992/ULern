@@ -20,7 +20,6 @@ namespace Cycles
             result = (int)Math.Pow(2,result);
                 return result;    
             }
-
             }
             
         }
