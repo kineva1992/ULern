@@ -33,13 +33,26 @@ namespace Cycles
         public static string RemoveStartSpaces(sting inputText)
         {
             int i = 0;
+            if(inputText != " "){
               while(char.IsWhiteSpace(inputText[i]))
               {
-              if(i == inputText.length - 1) return "";
+              if(i == inputText.Length - 1) return "";
               i++;              
               }
               
               return inputText.Substring(i++);
+              }
+              
+              else throw new ArgumentExeption("String is null");
+        }
+        
+        public static string RemoveStartSpacesVer2(string text)
+        {
+            while(text != string.Empty && char.IsWhiteSpace(text[0])){
+                text = text.Remove(0,1);
+            }
+
+            return text;
         }
 
     }
