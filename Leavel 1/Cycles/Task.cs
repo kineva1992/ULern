@@ -32,9 +32,14 @@ namespace Cycles
         */
         public static string RemoveStartSpaces(sting inputText)
         {
-        
-        
-        
+            int i = 0;
+              while(char.IsWhiteSpace(inputText[i]))
+              {
+              if(i == inputText.length - 1) return "";
+              i++;              
+              }
+              
+              return inputText.Substring(i++);
         }
 
     }
