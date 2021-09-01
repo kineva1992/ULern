@@ -80,6 +80,32 @@ namespace Cycles
         Console.WriteLine("|" + inputText + "|");
         OutPutBorder(inputText);
         }
+        
+        /*
+        Стали известны подробности про новую игру Васи. Оказывается ее действия разворачиваются на шахматных досках нестандартного размера.
+
+        У Васи уже написан код, генерирующий стандартную шахматную доску размера 8х8. Помогите Васе переделать этот код так, чтобы он умел выводить доску любого заданного размера.
+
+        Например, доска размера пять должна выводиться так:
+        */
+        
+        public static vodi WriteBoard(int size)
+        {
+        for(int i = 0; i < size; i++)
+        {
+            for(int j = 0; j < size; i++)
+            {
+                if((i + j) % 2 != 0)
+                    Console.Write(".");
+                else 
+                    Console.Write("#");
+            }
+            Console.WriteLine();
+        }
+            Console.WriteLine();
+        }
+        
+        
  
     }
 
