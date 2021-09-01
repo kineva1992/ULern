@@ -63,8 +63,24 @@ namespace Cycles
         Например, текст Hello world должен выводиться так:
         */
         
+        private static void OutPutBorder(string inputText)
+        {
+        Console.Write("+-");
+        for(int i = 0; i < inputText.Length; i++)
+            Console.Write("-");
+        Console.Write("-+\n");
+        }
         
-
+        public static void WriteTextWithBorder()
+        {
+        Console.WriteLine("Ведите пожалуйста желаемый текст для вывода: ");
+        string inputText = Console.ReadLine();
+        
+        OutPutBorder(inputText);
+        Console.WriteLine("|" + inputText + "|");
+        OutPutBorder(inputText);
+        }
+ 
     }
 
 }
