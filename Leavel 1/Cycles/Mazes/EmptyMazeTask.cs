@@ -4,21 +4,18 @@
 	{
 		public static void MoveOut(Robot robot, int width, int height)
 		{
+			MoveRobot(robot, Direction.Right, width - 3);
+			MoveRobot(robot, Direction.Down, height - 3);
 		}
 
-		private static void MoveRight(Robot robot, int stepCount)
+		private static void MoveRobot(Robot robot,Direction direction, int stepCount)
 		{
-            for (int i = 0; i < stepCount - 3; i++)
-            {
-				robot.MoveTo(Direction.Right);
-            }
-		}
-		private static void MoveLeft(Robot robot, int stepCount)
-		{
-			for (int i = 0; i < stepCount - 3; i++)
+			for (int i = 0; i < stepCount; i++)
 			{
-				robot.MoveTo(Direction.Left);
+				robot.MoveTo(direction);				
 			}
 		}
+
+		
 	}
 }
