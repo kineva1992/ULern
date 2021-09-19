@@ -56,5 +56,18 @@ namespace Arrays
 
             return CountInArray;
         }
+
+        public static int GetElementCountVer2(int[] items, int itemToCount)
+        {
+            int CountInArray = 0;
+
+            foreach (var item in items)
+            {
+                if (item == itemToCount)
+                    CountInArray++;
+            }
+
+            return CountInArray;
+        }
     }
 }
