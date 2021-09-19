@@ -69,5 +69,16 @@ namespace Arrays
 
             return CountInArray;
         }
+
+        private static bool ContainsAtIndex(int[] array, int[] subArray, int index)
+        {
+            foreach (var item in subArray)
+            {
+                if (array[index] != item)
+                    return false;
+                else index++;
+            }
+            return true;
+        }
     }
 }
