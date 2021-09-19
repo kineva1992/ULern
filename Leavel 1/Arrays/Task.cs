@@ -80,5 +80,21 @@ namespace Arrays
             }
             return true;
         }
+
+        private static string GetSuit(Suits suit)
+        {
+            return (new[] { "Жезлов", "Монет", "Кубков", "Мечей" })[(int)suit];
+        }
+        public static bool CheckFirstElement(int[] array)
+        {
+            return array != null & array.Length != 0 & array[0] == 0;
+        }
+    }
+    enum Suits
+    {
+        Wands,
+        Coins,
+        Cups,
+        Swords
     }
 }
