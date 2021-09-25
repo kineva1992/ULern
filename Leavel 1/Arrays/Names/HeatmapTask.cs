@@ -21,7 +21,7 @@ namespace Names
             {
                 mounts[i - 1] = i.ToString();
             }
-            //
+            //заполнение масива heat
             foreach (var item in names)
             {
                 if (item.BirthDate.Day != 1)
