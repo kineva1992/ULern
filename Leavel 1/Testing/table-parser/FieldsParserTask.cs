@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using NUnit.Framework;
 
 namespace TableParser
@@ -17,25 +19,98 @@ namespace TableParser
         }
 
         // Скопируйте сюда метод с тестами из предыдущей задачи.
+        [TestCase("text", new[] { "text" })]
+        [TestCase("hello world", new[] { "hello", "world" })]
+        [TestCase("\'\' \"bcd ef\" \'x y\'", new[] { "", "bcd ef", "x y" })]
+        [TestCase("", new string[0])]
+        [TestCase("''", new[] { "" })]
+        [TestCase("\"\\\\\"", new[] { "\\" })]
+        [TestCase("\'\\\'test\\\'\'", new[] { "\'test\'" })]
+        [TestCase("\"\\\"test\\\"\"", new[] { "\"test\"" })]
+        [TestCase("  test  ignore  ", new[] { "test", "ignore" })]
+        [TestCase("'first ", new[] { "first " })]
+        [TestCase("first 'second'", new[] { "first", "second" })]
+        [TestCase("'second' first", new[] { "second", "first" })]
+        [TestCase("\"'first'\"", new[] { "'first'" })]
+        [TestCase("'\"first\"'", new[] { "\"first\"" })]
+        [TestCase("'a'b'c'", new[] { "a", "b", "c" })]
+        public static void RunTests(string input, string[] expectedOutput)
+        {
+            // Тело метода изменять не нужно
+            Test(input, expectedOutput);
+        }
     }
 
+    // При решении этой задаче постарайтесь избежать создания методов, длиннее 10 строк.
+    // Подумайте как можно использовать ReadQuotedField и Token в этой задаче.
     public class FieldsParserTask
     {
-        // При решении этой задаче постарайтесь избежать создания методов, длиннее 10 строк.
-        // Подумайте как можно использовать ReadQuotedField и Token в этой задаче.
         public static List<Token> ParseLine(string line)
         {
-            return new List<Token> { ReadQuotedField(line, 0) }; // сокращенный синтаксис для инициализации коллекции.
-        }
-        
-        private static Token ReadField(string line, int startIndex)
-        {
-            return new Token(line, 0, line.Length);
+            var result = new List<Token>();
+            var startIndex = SkipWhitespaces(line, 0);
+            while (startIndex < line.Length)
+            {
+                var currentToken = ReadField(line, startIndex);
+                if ((currentToken.Value != " ") || ((currentToken.Value == " ") && (currentToken.Length > 1)))
+                    result.Add(currentToken);
+                startIndex = SkipWhitespaces(line, currentToken.GetIndexNextToToken());
+            }
+            return result;
         }
 
-        public static Token ReadQuotedField(string line, int startIndex)
+        private static Token ReadField(string line, int startIndex)
         {
-            return QuotedFieldTask.ReadQuotedField(line, startIndex);
+            switch (line[startIndex])
+            {
+                case ' ':
+                    return new Token(" ", startIndex, 1);
+                case '\'':
+                    return ReadQuotedField(line, startIndex);
+                case '"':
+                    return ReadQuotedField(line, startIndex);
+                default:
+                    return ReadSimpleField(line, startIndex);
+            }
+        }
+
+        private static Token ReadSimpleField(string line, int startIndex)
+        {
+            return ReadField(line, startIndex, new[] { ' ', '\'', '"' }, false);
+        }
+
+        private static Token ReadQuotedField(string line, int startIndex)
+        {
+            return ReadField(line, startIndex, new[] { line[startIndex] }, true);
+        }
+
+        private static Token ReadField(string line, int startIndex, char[] stopChars, bool quotes)
+        {
+            var value = new StringBuilder();
+            var i = startIndex;
+            if (quotes) i++; //пропускаем открывающую кавычку
+            while ((i < line.Length) && !stopChars.Contains(line[i]))
+            {
+                if (line[i] == '\\' && quotes)
+                    ++i;
+                if (i < line.Length)
+                    value.Append(line[i++]);
+                else
+                {
+                    --i;
+                    break;
+                }
+            }
+            if (quotes && i < line.Length && line[i] == stopChars[0]) i++; //добавляем закрывающий символ
+            return new Token(value.ToString(), startIndex, i - startIndex);
+        }
+
+        private static int SkipWhitespaces(string line, int startIndex)
+        {
+            var i = startIndex;
+            while ((i < line.Length) && (line[i] == ' '))
+                ++i;
+            return i;
         }
     }
 }
