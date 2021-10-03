@@ -9,20 +9,47 @@ namespace Recognizer
             var width = g.GetLength(0);
             var height = g.GetLength(1);
             var result = new double[width, height];
-            for (int x = 1; x < width - 1; x++)
-                for (int y = 1; y < height - 1; y++)
+            var edge = sx.GetLength(0) / 2;
+            var sy = MakeMatrixSy(sx);
+            for (int x = edge; x < width - edge; x++)
+                for (int y = edge; y < height - edge; y++)
                 {
-                    // Вместо этого кода должно быть поэлементное умножение матриц sx и полученной транспонированием из неё sy на окрестность точки (x, y)
-                    // Такая операция ещё называется свёрткой (Сonvolution)
-                    var gx = 
-                        -g[x - 1, y - 1] - 2 * g[x, y - 1] - g[x + 1, y - 1] 
-                        + g[x - 1, y + 1] + 2 * g[x, y + 1] + g[x + 1, y + 1];
-                    var gy = 
-                        -g[x - 1, y - 1] - 2 * g[x - 1, y] - g[x - 1, y + 1] 
-                        + g[x + 1, y - 1] + 2 * g[x + 1, y] + g[x + 1, y + 1];
+                    var gx = MultiplyGS(g, sx, x, y);
+                    var gy = MultiplyGS(g, sy, x, y);
                     result[x, y] = Math.Sqrt(gx * gx + gy * gy);
                 }
             return result;
+        }
+
+        private static double[,] MakeMatrixSy(double[,] sx)
+        {
+            var lenX = sx.GetLength(0);
+            var lenY = sx.GetLength(1);
+            var sy = new double[lenX, lenY];
+            for (int i = 0; i < lenX; i++)
+            {
+                for (int j = 0; j < lenY; j++)
+                {
+                    sy[i, j] = sx[i, j];
+                }
+            }
+            return sy;
+        }
+
+        private static double MultiplyGS(double[,] g, double[,] s, int x, int y)
+        {
+            double gRes = 0;
+            var edge = s.GetLength(0) / 2;
+            var length = s.GetLength(0);
+
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < length; j++)
+                {
+                    gRes += s[i, j] * g[x + i - edge, y + j - edge];
+                }
+            }
+            return gRes;
         }
     }
 }
